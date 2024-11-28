@@ -24,7 +24,7 @@ class _LoginScreenAnimationState extends State<LoginAnimation>
 
     logoFadeAnimation = Tween<double>(begin: 0, end: 1).animate(controller);
 
-    slideAnimation = Tween(
+    slideAnimation = Tween<Offset>(
       begin: const Offset(-1, -1),
       end: Offset.zero,
     ).animate(
@@ -36,7 +36,7 @@ class _LoginScreenAnimationState extends State<LoginAnimation>
 
     scaleAnimation = Tween<double>(begin: 0, end: 1).animate(controller);
 
-    controller.forward();
+    controller.forward(); // Start the animation
   }
 
   @override

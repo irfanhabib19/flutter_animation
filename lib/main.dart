@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:flutter_animations/explicit_examples/list_animation.dart';
 import 'package:flutter_animations/explicit_examples/login_animation.dart';
 import 'package:flutter_animations/implicit_examples/animated_color_palletes.dart';
 import 'package:flutter_animations/implicit_examples/animated_shopping_cartButton.dart';
@@ -31,7 +32,8 @@ class MyHomePage extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 243, 104, 122),
         ),
-        body: Container(child: LoginAnimation()
+        body: Container(child: ListAnimation()
+            //LoginAnimation()
             //AnimatedTweenAnimation()
             //AnimatedShoppingCartbutton(),
             // AnimatedColorPalette(),

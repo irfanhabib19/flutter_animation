@@ -1,46 +1,88 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 
 class LoginAnimation extends StatefulWidget {
-  LoginAnimation({super.key});
+  const LoginAnimation({super.key});
 
   @override
-  State<LoginAnimation> createState() => _loginanimationState();
+  State<LoginAnimation> createState() => _LoginScreenAnimationState();
 }
 
-class _loginanimationState extends State<LoginAnimation> {
+class _LoginScreenAnimationState extends State<LoginAnimation>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller;
+  late Animation<double> logoFadeAnimation;
+  late Animation<Offset> slideAnimation;
+  late Animation<double> scaleAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1500),
+    );
+
+    logoFadeAnimation = Tween<double>(begin: 0, end: 1).animate(controller);
+
+    slideAnimation = Tween(
+      begin: const Offset(-1, -1),
+      end: Offset.zero,
+    ).animate(
+      CurvedAnimation(
+        parent: controller,
+        curve: Curves.ease,
+      ),
+    );
+
+    scaleAnimation = Tween<double>(begin: 0, end: 1).animate(controller);
+
+    controller.forward();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Center(
-        child: Container(
-          width: 300,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FlutterLogo(
-                size: 50,
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            FadeTransition(
+              opacity: logoFadeAnimation,
+              child: const FlutterLogo(
+                size: 100.0,
               ),
-              SizedBox(
-                height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: SlideTransition(
+                position: slideAnimation,
+                child: ScaleTransition(
+                  scale: scaleAnimation,
+                  child: Column(
+                    children: [
+                      const TextField(
+                        decoration: InputDecoration(
+                          labelText: 'Username',
+                        ),
+                      ),
+                      const SizedBox(height: 16.0),
+                      const TextField(
+                        decoration: InputDecoration(
+                          labelText: 'Password',
+                        ),
+                        obscureText: true,
+                      ),
+                      const SizedBox(height: 16.0),
+                      ElevatedButton(
+                        onPressed: () {},
+                        child: const Text('Login'),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              TextField(
-                decoration: InputDecoration(labelText: "User name"),
-              ),
-              SizedBox(
-                height: 7,
-              ),
-              TextField(
-                decoration: InputDecoration(labelText: "Password"),
-              ),
-              SizedBox(
-                height: 3,
-              ),
-              ElevatedButton(onPressed: () {}, child: Text("Log in"))
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

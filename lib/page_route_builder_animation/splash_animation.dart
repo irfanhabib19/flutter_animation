@@ -7,21 +7,35 @@ class SplashAnimation extends StatefulWidget {
   State<SplashAnimation> createState() => SplashAnimationState();
 }
 
-class SplashAnimationState extends State<SplashAnimation> {
+class SplashAnimationState extends State<SplashAnimation>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller;
+  late Animation<double> ScaleAnimation;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller = AnimationController(
+        vsync: this, duration: Duration(milliseconds: 1200));
+    ScaleAnimation = Tween<double>(begin: 1, end: 20).animate(controller);
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => destination()));
+        controller.forward();
       },
       child: Center(
-        child: Container(
-          height: 60,
-          width: 60,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.deepOrange,
+        child: ScaleTransition(
+          scale: ScaleAnimation,
+          child: Container(
+            height: 60,
+            width: 60,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.deepOrange,
+            ),
           ),
         ),
       ),

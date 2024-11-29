@@ -64,7 +64,11 @@ class _RadialProgressAnimationState extends State<LoadingAnimation>
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          controller.forward();
+          if (controller.isCompleted) {
+            controller.reverse(from: 1.0);
+          } else {
+            controller.forward();
+          }
         },
         child: const Icon(Icons.start),
       ),

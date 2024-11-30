@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:flutter_animations/custom_painter_exaples/bouncing_ball_animation.dart';
 import 'package:flutter_animations/explicit_examples/list_animation.dart';
 import 'package:flutter_animations/explicit_examples/loading_animation.dart';
 import 'package:flutter_animations/explicit_examples/login_animation.dart';
@@ -34,7 +35,8 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 243, 104, 122),
       ),
-      body: SplashAnimation(),
+      body: BouncingBallAnimation(),
+      // SplashAnimation(),
       /*Container(
             child: LoadingAnimation(
           color: Colors.green,

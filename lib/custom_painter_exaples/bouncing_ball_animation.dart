@@ -23,6 +23,8 @@ class _BouncingBallState extends State<BouncingBallAnimation>
       (status) {
         if (status == AnimationStatus.completed) {
           controller.reverse();
+        } else if (status == AnimationStatus.dismissed) {
+          controller.forward();
         }
       },
     );
